@@ -170,13 +170,9 @@ void gameIsWon() {
         gameOn = false;
     }
 }
-void position() {
-    fleet_position fp;
-    fp.battleship_fleet();
-}
+
 //main function
 int main() {
-    position();
     cout<<"BattleShip \n";
       while(gameOn){
         display_board();
