@@ -226,7 +226,7 @@ int main() {
       while(gameOn){
         display_board();
         shipSunkCount();
-        cout<<turns<<" guesses \n";
+        cout<<turns<<" torpedoes fired \n";
         selection();
         shipHit();
         gameIsWon();
