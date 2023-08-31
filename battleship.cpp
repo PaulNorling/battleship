@@ -214,7 +214,7 @@ void gameIsWon() {
         shipSunkCount();
         display_board();
         cout << "Congratulations, you have won the game!\n";
-        cout<<"It took you "<<turns<<" guesses to win.\n";
+        cout<<"It took you "<<turns<<" torpedoes to win.\n";
         gameOn = false;
     }
 }
