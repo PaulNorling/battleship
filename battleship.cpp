@@ -6,6 +6,7 @@ using namespace std;
 //variables
 bool gameOn = true;
 char rowCharacter;
+char fleet[10][10];
 int columnInteger;
 int row;
 int column;
@@ -31,17 +32,66 @@ char board[10][10]={{' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
                     {' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
                     {' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},};
 
-//fleet position
-char fleet[10][10]={{' ','D','D','D',' ',' ',' ',' ',' ',' '},
-                    {' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
-                    {' ','C','C','C','C','C',' ',' ',' ',' '},
-                    {' ',' ',' ',' ',' ',' ',' ',' ','S',' '},
-                    {' ',' ','P',' ',' ',' ',' ',' ','S',' '},
-                    {' ',' ','P',' ','B',' ',' ',' ','S',' '},
-                    {' ',' ',' ',' ','B',' ',' ',' ',' ',' '},
-                    {' ',' ',' ',' ','B',' ',' ',' ',' ',' '},
-                    {' ',' ',' ',' ','B',' ',' ',' ',' ',' '},
-                    {' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},};
+//random number for choosing fleet position
+void randomFleet() {
+     // Providing a seed value
+	srand((unsigned) time(NULL));
+
+	// Get a random number
+	int random = rand() % 3;
+    //fleet position 1
+    if(random == 0){
+        fleet[0][0]=' ',fleet[0][1]='D',fleet[0][2]='D',fleet[0][3]='D',fleet[0][4]=' ',fleet[0][5]=' ',fleet[0][6]=' ',fleet[0][7]=' ',fleet[0][8]=' ',fleet[0][9]=' ',
+        fleet[1][0]=' ',fleet[1][1]=' ',fleet[1][2]=' ',fleet[1][3]=' ',fleet[1][4]=' ',fleet[1][5]=' ',fleet[1][6]=' ',fleet[1][7]=' ',fleet[1][8]=' ',fleet[1][9]=' ',
+        fleet[2][0]=' ',fleet[2][1]='C',fleet[2][2]='C',fleet[2][3]='C',fleet[2][4]='C',fleet[2][5]='C',fleet[2][6]=' ',fleet[2][7]='S',fleet[2][8]='S',fleet[2][9]='S',
+        fleet[3][0]=' ',fleet[3][1]=' ',fleet[3][2]=' ',fleet[3][3]='B',fleet[3][4]=' ',fleet[3][5]=' ',fleet[3][6]=' ',fleet[3][7]=' ',fleet[3][8]=' ',fleet[3][9]=' ',
+        fleet[4][0]=' ',fleet[4][1]=' ',fleet[4][2]=' ',fleet[4][3]='B',fleet[4][4]=' ',fleet[4][5]=' ',fleet[4][6]=' ',fleet[4][7]=' ',fleet[4][8]=' ',fleet[4][9]=' ',
+        fleet[5][0]=' ',fleet[5][1]=' ',fleet[5][2]=' ',fleet[5][3]='B',fleet[5][4]=' ',fleet[5][5]=' ',fleet[5][6]=' ',fleet[5][7]='P',fleet[5][8]=' ',fleet[5][9]=' ',
+        fleet[6][0]=' ',fleet[6][1]=' ',fleet[6][2]=' ',fleet[6][3]='B',fleet[6][4]=' ',fleet[6][5]=' ',fleet[6][6]=' ',fleet[6][7]='P',fleet[6][8]=' ',fleet[6][9]=' ',
+        fleet[7][0]=' ',fleet[7][1]=' ',fleet[7][2]=' ',fleet[7][3]=' ',fleet[7][4]=' ',fleet[7][5]=' ',fleet[7][6]=' ',fleet[7][7]=' ',fleet[7][8]=' ',fleet[7][9]=' ',
+        fleet[8][0]=' ',fleet[8][1]=' ',fleet[8][2]=' ',fleet[8][3]=' ',fleet[8][4]=' ',fleet[8][5]=' ',fleet[8][6]=' ',fleet[8][7]=' ',fleet[8][8]=' ',fleet[8][9]=' ',
+        fleet[9][0]=' ',fleet[9][1]=' ',fleet[9][2]=' ',fleet[9][3]=' ',fleet[9][4]=' ',fleet[9][5]=' ',fleet[9][6]=' ',fleet[9][7]=' ',fleet[9][8]=' ',fleet[9][9]=' ';
+    }
+    //fleet position 2
+    else if(random == 1){
+        fleet[0][0]=' ',fleet[0][1]='D',fleet[0][2]='D',fleet[0][3]='D',fleet[0][4]=' ',fleet[0][5]=' ',fleet[0][6]=' ',fleet[0][7]=' ',fleet[0][8]='B',fleet[0][9]=' ',
+        fleet[1][0]=' ',fleet[1][1]=' ',fleet[1][2]=' ',fleet[1][3]=' ',fleet[1][4]=' ',fleet[1][5]=' ',fleet[1][6]=' ',fleet[1][7]=' ',fleet[1][8]='B',fleet[1][9]=' ',
+        fleet[2][0]=' ',fleet[2][1]=' ',fleet[2][2]='C',fleet[2][3]=' ',fleet[2][4]='S',fleet[2][5]=' ',fleet[2][6]=' ',fleet[2][7]=' ',fleet[2][8]='B',fleet[2][9]=' ',
+        fleet[3][0]=' ',fleet[3][1]=' ',fleet[3][2]='C',fleet[3][3]=' ',fleet[3][4]='S',fleet[3][5]=' ',fleet[3][6]=' ',fleet[3][7]=' ',fleet[3][8]='B',fleet[3][9]=' ',
+        fleet[4][0]=' ',fleet[4][1]=' ',fleet[4][2]='C',fleet[4][3]=' ',fleet[4][4]='S',fleet[4][5]=' ',fleet[4][6]=' ',fleet[4][7]=' ',fleet[4][8]=' ',fleet[4][9]=' ',
+        fleet[5][0]=' ',fleet[5][1]=' ',fleet[5][2]='C',fleet[5][3]=' ',fleet[5][4]=' ',fleet[5][5]=' ',fleet[5][6]='P',fleet[5][7]='P',fleet[5][8]=' ',fleet[5][9]=' ',
+        fleet[6][0]=' ',fleet[6][1]=' ',fleet[6][2]='C',fleet[6][3]=' ',fleet[6][4]=' ',fleet[6][5]=' ',fleet[6][6]=' ',fleet[6][7]=' ',fleet[6][8]=' ',fleet[6][9]=' ',
+        fleet[7][0]=' ',fleet[7][1]=' ',fleet[7][2]=' ',fleet[7][3]=' ',fleet[7][4]=' ',fleet[7][5]=' ',fleet[7][6]=' ',fleet[7][7]=' ',fleet[7][8]=' ',fleet[7][9]=' ',
+        fleet[8][0]=' ',fleet[8][1]=' ',fleet[8][2]=' ',fleet[8][3]=' ',fleet[8][4]=' ',fleet[8][5]=' ',fleet[8][6]=' ',fleet[8][7]=' ',fleet[8][8]=' ',fleet[8][9]=' ',
+        fleet[9][0]=' ',fleet[9][1]=' ',fleet[9][2]=' ',fleet[9][3]=' ',fleet[9][4]=' ',fleet[9][5]=' ',fleet[9][6]=' ',fleet[9][7]=' ',fleet[9][8]=' ',fleet[9][9]=' ';
+    }
+    //fleet position 3
+    else if(random == 2){
+        fleet[0][0]=' ',fleet[0][1]='D',fleet[0][2]=' ',fleet[0][3]=' ',fleet[0][4]=' ',fleet[0][5]=' ',fleet[0][6]=' ',fleet[0][7]=' ',fleet[0][8]='P',fleet[0][9]='P',
+        fleet[1][0]=' ',fleet[1][1]='D',fleet[1][2]=' ',fleet[1][3]='S',fleet[1][4]='S',fleet[1][5]='S',fleet[1][6]=' ',fleet[1][7]=' ',fleet[1][8]=' ',fleet[1][9]=' ',
+        fleet[2][0]=' ',fleet[2][1]='D',fleet[2][2]=' ',fleet[2][3]=' ',fleet[2][4]=' ',fleet[2][5]=' ',fleet[2][6]=' ',fleet[2][7]=' ',fleet[2][8]=' ',fleet[2][9]=' ',
+        fleet[3][0]=' ',fleet[3][1]=' ',fleet[3][2]=' ',fleet[3][3]=' ',fleet[3][4]=' ',fleet[3][5]=' ',fleet[3][6]=' ',fleet[3][7]=' ',fleet[3][8]=' ',fleet[3][9]=' ',
+        fleet[4][0]=' ',fleet[4][1]=' ',fleet[4][2]=' ',fleet[4][3]='C',fleet[4][4]='C',fleet[4][5]='C',fleet[4][6]='C',fleet[4][7]='C',fleet[4][8]=' ',fleet[4][9]=' ',
+        fleet[5][0]=' ',fleet[5][1]=' ',fleet[5][2]=' ',fleet[5][3]=' ',fleet[5][4]=' ',fleet[5][5]=' ',fleet[5][6]=' ',fleet[5][7]=' ',fleet[5][8]=' ',fleet[5][9]=' ',
+        fleet[6][0]=' ',fleet[6][1]=' ',fleet[6][2]=' ',fleet[6][3]=' ',fleet[6][4]=' ',fleet[6][5]=' ',fleet[6][6]=' ',fleet[6][7]=' ',fleet[6][8]=' ',fleet[6][9]=' ',
+        fleet[7][0]=' ',fleet[7][1]=' ',fleet[7][2]=' ',fleet[7][3]=' ',fleet[7][4]=' ',fleet[7][5]=' ',fleet[7][6]=' ',fleet[7][7]=' ',fleet[7][8]=' ',fleet[7][9]=' ',
+        fleet[8][0]=' ',fleet[8][1]='B',fleet[8][2]='B',fleet[8][3]='B',fleet[8][4]='B',fleet[8][5]=' ',fleet[8][6]=' ',fleet[8][7]=' ',fleet[8][8]=' ',fleet[8][9]=' ',
+        fleet[9][0]=' ',fleet[9][1]=' ',fleet[9][2]=' ',fleet[9][3]=' ',fleet[9][4]=' ',fleet[9][5]=' ',fleet[9][6]=' ',fleet[9][7]=' ',fleet[9][8]=' ',fleet[9][9]=' ';
+    }
+    //fleet position 4
+    else if(random == 3){
+        fleet[0][0]=' ',fleet[0][1]='B',fleet[0][2]='B',fleet[0][3]='B',fleet[0][4]='B',fleet[0][5]=' ',fleet[0][6]=' ',fleet[0][7]=' ',fleet[0][8]=' ',fleet[0][9]='C',
+        fleet[1][0]=' ',fleet[1][1]=' ',fleet[1][2]=' ',fleet[1][3]=' ',fleet[1][4]=' ',fleet[1][5]=' ',fleet[1][6]=' ',fleet[1][7]=' ',fleet[1][8]=' ',fleet[1][9]='C',
+        fleet[2][0]=' ',fleet[2][1]=' ',fleet[2][2]=' ',fleet[2][3]=' ',fleet[2][4]=' ',fleet[2][5]=' ',fleet[2][6]=' ',fleet[2][7]=' ',fleet[2][8]=' ',fleet[2][9]='C',
+        fleet[3][0]=' ',fleet[3][1]=' ',fleet[3][2]=' ',fleet[3][3]=' ',fleet[3][4]=' ',fleet[3][5]=' ',fleet[3][6]=' ',fleet[3][7]=' ',fleet[3][8]=' ',fleet[3][9]='C',
+        fleet[4][0]=' ',fleet[4][1]=' ',fleet[4][2]=' ',fleet[4][3]=' ',fleet[4][4]=' ',fleet[4][5]=' ',fleet[4][6]=' ',fleet[4][7]=' ',fleet[4][8]=' ',fleet[4][9]='C',
+        fleet[5][0]=' ',fleet[5][1]=' ',fleet[5][2]='S',fleet[5][3]=' ',fleet[5][4]='P',fleet[5][5]='P',fleet[5][6]=' ',fleet[5][7]=' ',fleet[5][8]=' ',fleet[5][9]=' ',
+        fleet[6][0]=' ',fleet[6][1]=' ',fleet[6][2]='S',fleet[6][3]=' ',fleet[6][4]=' ',fleet[6][5]=' ',fleet[6][6]=' ',fleet[6][7]=' ',fleet[6][8]=' ',fleet[6][9]=' ',
+        fleet[7][0]=' ',fleet[7][1]=' ',fleet[7][2]='S',fleet[7][3]=' ',fleet[7][4]=' ',fleet[7][5]=' ',fleet[7][6]=' ',fleet[7][7]=' ',fleet[7][8]=' ',fleet[7][9]=' ',
+        fleet[8][0]=' ',fleet[8][1]=' ',fleet[8][2]=' ',fleet[8][3]=' ',fleet[8][4]=' ',fleet[8][5]=' ',fleet[8][6]=' ',fleet[8][7]=' ',fleet[8][8]=' ',fleet[8][9]=' ',
+        fleet[9][0]=' ',fleet[9][1]=' ',fleet[9][2]=' ',fleet[9][3]=' ',fleet[9][4]='D',fleet[9][5]='D',fleet[9][6]='D',fleet[9][7]=' ',fleet[9][8]=' ',fleet[9][9]=' ';
+    }
+}
 
 //what ship is hit
 void shipHit() {
@@ -150,7 +200,7 @@ void selection() {
         
     }else if(board[row][column] != 'X' && fleet[row][column] != ' '){
         board[row][column] = 'X';
-        cout<<"HIT! ";
+        cout<<"HIT! \n";
         hits++;
         turns++;
     }else{
@@ -172,6 +222,7 @@ void gameIsWon() {
 //main function
 int main() {
     cout<<"BattleShip \n";
+    randomFleet();
       while(gameOn){
         display_board();
         shipSunkCount();
