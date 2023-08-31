@@ -1,3 +1,3 @@
 # battleship
 
-open parent file in terminal run ./battleship
+open parent folder in terminal run ./battleship
